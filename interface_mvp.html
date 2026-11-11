@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missões — Simulador Elétrico</title>
+    <meta name="description" content="Monte as ligações do circuito elétrico e conclua os objetivos da missão.">
+    <meta property="og:title" content="Missões — Simulador Elétrico">
+    <meta property="og:description" content="Monte as ligações do circuito elétrico e conclua os objetivos da missão.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+
+        <header>Simulador Elétrico</header>
+
+
+        <div class="content">
+
+
+            <aside class="side-right" id="fios" aria-label="Componentes e fios">
+                <section class="component-section" aria-labelledby="components-title">
+                    <h2 id="components-title">Componentes</h2>
+                    <div class="component-shortcuts">
+                        <button class="component-preview" type="button" data-image="lampada.png" data-title="Lâmpada" data-description="Transforma energia elétrica em luz. No circuito, deve ser ligada ao neutro e ao retorno do interruptor.">
+                            <img src="lampada.png" alt="">
+                            <span>Lâmpada</span>
+                        </button>
+                        <button class="component-preview" type="button" data-image="interruptor_paralelo.png" data-title="Interruptor paralelo" data-description="Permite controlar uma lâmpada de dois pontos diferentes. As ligações devem seguir os objetivos da missão.">
+                            <img src="interruptor_paralelo.png" alt="">
+                            <span>Interruptor</span>
+                        </button>
+                    </div>
+                </section>
+                <section class="wire-section" aria-labelledby="wire-title">
+                    <h2 id="wire-title">Fios</h2>
+                    <div class="wire-grid" aria-label="Fios disponíveis">
+                        <button class="wire-button" type="button" aria-label="Selecionar fio vermelho"><img src="fio_vermelho.png" class="draggable-wire" id="fio-vermelho" alt=""></button>
+                        <button class="wire-button" type="button" aria-label="Selecionar fio preto"><img src="fio_preto.png" class="draggable-wire" id="fio-preto" alt=""></button>
+                        <button class="wire-button" type="button" aria-label="Selecionar fio branco"><img src="fio_branco.png" class="draggable-wire" id="fio-branco" alt=""></button>
+                        <button class="wire-button" type="button" aria-label="Selecionar fio azul"><img src="fio_azul.png" class="draggable-wire" id="fio-azul" alt=""></button>
+                        <button class="wire-button" type="button" aria-label="Selecionar fio terra"><img src="fio_terra.png" class="draggable-wire" id="fio-terra" alt=""></button>
+                        <button class="wire-button" type="button" aria-label="Selecionar fio amarelo"><img src="fio_amarelo.png" class="draggable-wire" id="fio-amarelo" alt=""></button>
+                        <button class="wire-button" type="button" aria-label="Selecionar fio cinza"><img src="fio_cinza.png" class="draggable-wire" id="fio-cinza" alt=""></button>
+                    </div>
+                </section>
+
+            </aside>
+
+            <!-- =================================
+                 MAIN
+            ================================== -->
+
+            <main id="main">
+
+                <div class="grid" id="grid"></div>
+
+            </main>
+
+            <!-- =================================
+                 SIDE LEFT
+            ================================== -->
+
+            <aside class="side-left">
+
+                <section class="mission-panel" aria-labelledby="mission-title">
+                    <h2 id="mission-title">Missões</h2>
+                    <p class="mission-name">Missão 1: Interruptor paralelo</p>
+                    <p id="mission-description">Monte o circuito de iluminação com interruptor paralelo.</p>
+                    <p id="mission-status" role="status">Aguardando início</p>
+                    <progress id="mission-progress" max="3" value="0" aria-label="Progresso da missão"></progress>
+                    <p id="mission-count">0 de 3 objetivos</p>
+                    <ol class="mission-list">
+                        <li class="mission-step"><span class="mission-check" aria-hidden="true">1</span><div><h3>Leve a fase até um interruptor</h3><p>Use o fio vermelho para ligar o barramento superior ao interruptor.</p><span class="mission-state">Pendente</span></div></li>
+                        <li class="mission-step"><span class="mission-check" aria-hidden="true">2</span><div><h3>Ligue o neutro à lâmpada</h3><p>Use o fio azul para ligar o barramento inferior à lâmpada.</p><span class="mission-state">Pendente</span></div></li>
+                        <li class="mission-step"><span class="mission-check" aria-hidden="true">3</span><div><h3>Conclua o retorno</h3><p>Use a cor de retorno indicada para conectar a lâmpada ao interruptor.</p><span class="mission-state">Pendente</span></div></li>
+                    </ol>
+                </section>
+
+            </aside>
+
+        </div>
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <footer>
+
+            <button id="btnTutorial" type="button">Vídeo de instrução</button>
+
+            <button id="btnCircuito">
+
+                Interruptor Paralelo
+
+            </button>
+
+        </footer>
+
+    </div>
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <dialog id="mission-notice" aria-labelledby="notice-title" aria-describedby="notice-description">
+        <span class="notice-check" aria-hidden="true">✓</span>
+        <h2 id="notice-title">Missão concluída!</h2>
+        <p id="notice-description">Parabéns! Você completou os objetivos desta missão.</p>
+        <button id="mission-dismiss" type="button" autofocus>Continuar</button>
+    </dialog>
+    <dialog id="component-dialog" aria-labelledby="component-dialog-title" aria-describedby="component-dialog-description">
+        <img id="component-dialog-image" alt="">
+        <h2 id="component-dialog-title"></h2>
+        <p id="component-dialog-description"></p>
+        <button id="component-dismiss" type="button" autofocus>Fechar</button>
+    </dialog>
+    <dialog id="tutorial-dialog" aria-labelledby="tutorial-title" aria-describedby="tutorial-status">
+        <h2 id="tutorial-title">Vídeo de instrução</h2>
+        <video id="tutorial-video" controls preload="none">
+            <source src="video_instrucao.mp4" type="video/mp4">
+            Seu navegador não oferece suporte à reprodução de vídeo.
+        </video>
+        <p id="tutorial-status">Carregando o vídeo de instrução...</p>
+        <button id="tutorial-dismiss" type="button" autofocus>Fechar</button>
+    </dialog>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

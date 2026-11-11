@@ -1,0 +1,557 @@
+/* =========================================
+   VARIÁVEIS DE COR
+========================================= */
+
+:root {
+    --cor-fundo: #17181c;
+    --cor-painel: #e8e9ec;
+    --cor-borda: #2a2c33;
+    --cor-acento: #00bfff;
+    --cor-acento-escuro: #0095cc;
+    --cor-grade: #101114;
+    --cor-missao-texto: #252832;
+    --cor-missao-suave: #5e6572;
+    --cor-missao-borda: #d4d9df;
+    --cor-missao-superficie: #fff;
+    --cor-sucesso: #157347;
+    --cor-sucesso-fundo: #e6f4ec;
+    --cor-aviso-sombra: rgba(0, 0, 0, 0.4);
+    --cor-aviso-fundo: rgba(0, 0, 0, 0.6);
+    --cor-texto: #f5f5f5;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    min-height: 52px;
+    font-size: 16px;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(160deg, #17181c 0%, #23252d 100%);
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--cor-texto);
+}
+
+.container {
+    width: 95%;
+    height: 95vh;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--cor-borda);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--cor-painel);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid var(--cor-borda);
+    background: #20222a;
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--cor-acento);
+}
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.content {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* =========================================
+   SIDE RIGHT
+========================================= */
+
+.side-right {
+    order: 3;
+    width: 250px;
+    flex: 0 0 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 10px;
+    border-left: 2px solid var(--cor-borda);
+    background: #f2f3f5;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* =========================================
+   IMAGENS DRAGGABLE
+========================================= */
+
+.draggable-image {
+    width: 50px;
+    height: 150px;
+    cursor: grab;
+    user-select: none;
+}
+
+.draggable-wire {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 8px;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+#fio-amarelo {
+    background: #fff;
+    outline: 1px solid #222;
+    outline-offset: -4px;
+    border-radius: 14px;
+}
+
+.draggable-wire:hover {
+    transform: scale(1.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* =========================================
+   MAIN
+========================================= */
+
+main {
+    order: 2;
+    flex: 1;
+    overflow: auto;
+    min-width: 0;
+    background-color: var(--cor-grade);
+    background-image: linear-gradient(rgba(16, 17, 20, 0.35), rgba(16, 17, 20, 0.35)), url("mesa.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* =========================================
+   GRID
+========================================= */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(100, 50px);
+    grid-template-rows: repeat(100, 50px);
+    width: max-content;
+    height: max-content;
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    background: transparent;
+    transition: background 0.15s;
+}
+
+.cell:hover {
+    background: rgba(0, 191, 255, 0.25);
+    color: white;
+}
+
+.drop-hover {
+    background: rgba(144, 238, 144, 0.4) !important;
+}
+
+/* =========================================
+   COMPONENTES POSICIONADOS
+========================================= */
+
+.placed-image {
+    width: 50px;
+    height: 150px;
+    position: absolute;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* =========================================
+   FIOS
+========================================= */
+
+.wire-line {
+    position: absolute;
+    background: red;
+    border-radius: 3px;
+    z-index: 999;
+    pointer-events: none;
+}
+
+/* =========================================
+   SIDE LEFT
+========================================= */
+
+.side-left {
+    order: 1;
+    width: 250px;
+    flex: 0 0 250px;
+    overflow-y: auto;
+    padding: 20px 16px;
+    border-right: 2px solid var(--cor-borda);
+    background: var(--cor-painel);
+    color: var(--cor-missao-texto);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    border-top: 2px solid var(--cor-borda);
+    background: #20222a;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* =========================================
+   TABS
+========================================= */
+
+.tabs {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    padding: 10px;
+}
+
+/* =========================================
+   BOTÕES DAS ABAS
+========================================= */
+
+.tab-button {
+    padding: 8px 12px;
+    border: none;
+    background: #3a3d47;
+    color: white;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.tab-button:hover {
+    background: #565a68;
+    transform: translateY(-1px);
+}
+
+/* ABA ATIVA */
+
+.tab-button.active {
+    background: var(--cor-acento);
+}
+
+/* =========================================
+   CONTEÚDO DAS ABAS
+========================================= */
+
+.tab-content {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding-top: 20px;
+}
+
+/* ABA ATIVA */
+
+.tab-content.active {
+    display: flex;
+}
+
+/* =========================================
+   PAINEL DE COMPONENTES E FIOS
+========================================= */
+
+#fios {
+    display: flex;
+}
+
+.component-shortcuts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    width: 100%;
+}
+
+.component-section,
+.wire-section {
+    width: 100%;
+}
+
+.component-section {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #c8cbd1;
+}
+
+.component-section h2,
+.wire-section h2 {
+    margin-bottom: 10px;
+    color: #252832;
+    font-size: 16px;
+    text-align: left;
+}
+
+.component-preview {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 4px;
+    border: 1px solid #c8cbd1;
+    border-radius: 6px;
+    background: #fff;
+    color: #252832;
+    cursor: pointer;
+    font: inherit;
+    font-size: 12px;
+}
+
+.component-preview img {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+}
+
+.component-preview:hover {
+    border-color: var(--cor-acento-escuro);
+    background: #eefaff;
+}
+
+.wire-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    justify-items: center;
+    gap: 10px 6px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.wire-button {
+    display: grid;
+    width: 66px;
+    height: 66px;
+    min-height: 66px;
+    place-items: center;
+    padding: 4px;
+    border: 1px solid #c8cbd1;
+    border-radius: 8px;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+.wire-button:hover {
+    transform: translateY(-2px);
+    background: #eefaff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
+}
+
+/* =========================================
+   ABA SIMBOLOS EM 2 COLUNAS
+========================================= */
+
+#simbolos {
+    display: none;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+/* ABA ATIVA */
+
+#simbolos.active {
+    display: grid;
+}
+
+/* =========================================
+   IMAGENS DOS SIMBOLOS
+========================================= */
+
+.symbol-image {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 6px;
+    transition: transform 0.15s, background 0.15s;
+}
+
+.symbol-image:hover {
+    transform: scale(1.08);
+    background: rgba(0, 191, 255, 0.12);
+}
+
+/* =========================================
+   SÍMBOLOS POSICIONADOS
+========================================= */
+
+.placed-symbol {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    pointer-events: none;
+    z-index: 150;
+    object-fit: contain;
+}
+
+#btnCircuito {
+    min-height: 52px;
+    padding: 14px 26px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: var(--cor-acento);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 191, 255, 0.35);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+#btnCircuito:hover {
+    background: var(--cor-acento-escuro);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 191, 255, 0.45);
+}
+
+#btnCircuito:active {
+    transform: translateY(0);
+}
+
+#btnTutorial {
+    min-height: 52px;
+    padding: 14px 22px;
+    border: 1px solid #565a68;
+    border-radius: 8px;
+    background: #3a3d47;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+#btnTutorial:hover {
+    background: #565a68;
+    transform: translateY(-2px);
+}
+
+/* =========================================
+   FIO SELECIONADO E PONTO INICIAL
+========================================= */
+
+.draggable-wire.selected {
+    outline: 3px solid var(--cor-acento);
+    border-radius: 6px;
+    transform: scale(1.1);
+}
+
+.start-point {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* MISSÕES E AVISO DE CONCLUSÃO */
+.side-right { flex-shrink: 0; }
+header, footer { flex-shrink: 0; }
+.content { min-height: 0; }
+.mission-panel h2 { font-size: 22px; margin-bottom: 14px; }
+.mission-name { font-size: 16px; font-weight: bold; margin-bottom: 8px; }
+#mission-status, #mission-count { font-size: 12px; color: var(--cor-missao-suave); }
+#mission-progress { width: 100%; height: 8px; margin: 12px 0 6px; accent-color: var(--cor-sucesso); }
+.mission-list { list-style: none; margin-top: 20px; }
+.mission-step { display: flex; align-items: flex-start; gap: 10px; padding: 16px 0; border-top: 1px solid var(--cor-missao-borda); }
+.mission-check { flex: 0 0 24px; height: 24px; display: grid; place-items: center; border: 1px solid var(--cor-missao-borda); border-radius: 50%; font-size: 12px; }
+.mission-step h3 { font-size: 14px; margin-bottom: 6px; }
+.mission-step p { font-size: 12px; line-height: 1.6; color: var(--cor-missao-suave); overflow-wrap: anywhere; }
+.mission-state { display: block; margin-top: 8px; font-size: 11px; color: var(--cor-missao-suave); }
+.completed .mission-check { background: var(--cor-sucesso-fundo); border-color: var(--cor-sucesso); color: var(--cor-sucesso); }
+.completed .mission-state { color: var(--cor-sucesso); font-weight: bold; }
+#mission-notice { margin: auto; width: min(420px, calc(100% - 32px)); padding: 32px; border: none; border-radius: 8px; background: var(--cor-missao-superficie); color: var(--cor-missao-texto); box-shadow: 0 12px 40px var(--cor-aviso-sombra); text-align: center; }
+#mission-notice::backdrop { background: var(--cor-aviso-fundo); }
+#component-dialog { margin: auto; width: min(420px, calc(100% - 32px)); padding: 24px; border: none; border-radius: 8px; background: var(--cor-missao-superficie); color: var(--cor-missao-texto); box-shadow: 0 12px 40px var(--cor-aviso-sombra); text-align: center; }
+#component-dialog::backdrop { background: var(--cor-aviso-fundo); }
+#component-dialog-image { display: block; width: min(240px, 100%); height: min(240px, 40vh); margin: 0 auto 16px; object-fit: contain; }
+#component-dialog h2 { font-size: 22px; margin-bottom: 10px; }
+#component-dialog p { font-size: 15px; line-height: 1.5; color: var(--cor-missao-suave); }
+#component-dismiss { min-height: 48px; margin-top: 20px; padding: 14px 28px; background: var(--cor-acento-escuro); color: #fff; border: none; border-radius: 6px; font: inherit; cursor: pointer; }
+#tutorial-dialog { margin: auto; width: min(680px, calc(100% - 32px)); padding: 24px; border: none; border-radius: 8px; background: var(--cor-missao-superficie); color: var(--cor-missao-texto); box-shadow: 0 12px 40px var(--cor-aviso-sombra); }
+#tutorial-dialog::backdrop { background: var(--cor-aviso-fundo); }
+#tutorial-dialog h2 { margin-bottom: 16px; font-size: 22px; }
+#tutorial-video { display: block; width: 100%; max-height: 60vh; aspect-ratio: 16 / 9; background: #101114; }
+#tutorial-status { margin-top: 12px; font-size: 14px; line-height: 1.5; color: var(--cor-missao-suave); }
+#tutorial-dismiss { min-height: 48px; margin-top: 18px; padding: 14px 28px; border: none; border-radius: 6px; background: var(--cor-acento-escuro); color: #fff; font: inherit; cursor: pointer; }
+.notice-check { display: grid; place-items: center; width: 48px; height: 48px; margin: 0 auto 16px; border-radius: 50%; background: var(--cor-sucesso-fundo); color: var(--cor-sucesso); font-size: 26px; }
+#mission-notice h2 { font-size: 24px; margin-bottom: 12px; }
+#mission-notice p { font-size: 15px; line-height: 1.5; color: var(--cor-missao-suave); }
+#mission-dismiss { min-height: 48px; margin-top: 24px; padding: 14px 28px; background: var(--cor-sucesso); color: var(--cor-missao-superficie); border: none; border-radius: 6px; font: inherit; cursor: pointer; }
+button:focus-visible { outline: 3px solid var(--cor-acento-escuro); outline-offset: 4px; }
+@media (max-width: 700px) {
+    .container { width: 100%; height: 100dvh; border-radius: 0; }
+    .content { display: grid; grid-template-columns: minmax(0, 1fr) 180px; grid-template-rows: minmax(0, 1fr) minmax(0, 40%); }
+    #fios { grid-column: 2; grid-row: 1; }
+    .side-right { width: 180px; padding: 10px 6px; }
+    .component-preview img { width: 36px; height: 36px; }
+    .wire-grid { gap: 8px 2px; }
+    .wire-button { width: 48px; height: 48px; min-height: 48px; }
+    .draggable-wire { width: 38px; height: 38px; }
+    main { grid-column: 1; grid-row: 1; min-height: 230px; }
+    .side-left { grid-column: 1 / -1; width: 100%; max-height: none; border-left: 0; border-right: 0; border-top: 2px solid var(--cor-borda); }
+    header { height: 54px; font-size: 22px; }
+    footer { height: auto; min-height: 64px; gap: 8px; padding: 8px; }
+    #btnCircuito { min-width: 0; min-height: 48px; flex: 1; padding: 10px 12px; font-size: 15px; }
+    #btnTutorial { min-height: 48px; padding: 10px 12px; font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+}
